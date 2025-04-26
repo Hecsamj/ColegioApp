@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mi Colegio</string>
+    <string name="title_register">Registrar Usuario</string>
+    <string name="title_login">Iniciar Sesión</string>
+    <string name="title_dashboard">Panel Principal</string>
+    <string name="hint_name">Nombre Completo</string>
+    <string name="hint_email">Correo Electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_phone">Número de Teléfono</string>
+    <string name="hint_dob">Fecha de Nacimiento</string>
+    <string name="btn_register">Registrar</string>
+    <string name="btn_login">Ingresar</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minha Escola</string>
+    <string name="title_register">Registrar Usuário</string>
+    <string name="title_login">Entrar</string>
+    <string name="title_dashboard">Painel Principal</string>
+    <string name="hint_name">Nome Completo</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_phone">Número de Telefone</string>
+    <string name="hint_dob">Data de Nascimento</string>
+    <string name="btn_register">Registrar</string>
+    <string name="btn_login">Entrar</string>
+</resources>

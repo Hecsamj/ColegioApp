@@ -1,0 +1,26 @@
+<resources>
+    <!-- Cadenas predeterminadas -->
+    <string name="app_name">ColegioApp</string>
+
+    <!-- Botones -->
+    <string name="btn_login">Iniciar sesión</string>
+    <string name="btn_register">Registrarse</string>
+
+    <!-- Campos de formulario -->
+    <string name="hint_name">Nombre completo</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_phone">Número de teléfono</string>
+    <string name="hint_dob">Fecha de nacimiento</string>
+    <string name="hint_password">Contraseña</string>
+
+    <!-- Títulos -->
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_login">Iniciar sesión</string>
+    <string name="title_register">Registrar</string>
+
+    <!-- Tipos de documento -->
+    <string-array name="document_types">
+        <item>DNI</item>
+        <item>Documento de Extranjería</item>
+    </string-array>
+</resources>
