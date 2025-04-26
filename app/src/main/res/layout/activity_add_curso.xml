@@ -1,124 +1,374 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".cursos.AddCursoActivity">
+    android:layout_height="match_parent">
 
-    <!-- Titulo de la pantalla -->
-    <TextView
-        android:id="@+id/tvAddCursoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Curso"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Nombre del curso -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCursoNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvAddCursoTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp">
+        <!-- TÍTULO -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Curso"
+            android:textSize="24sp"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCursoNombre"
+        <!-- NOMBRE DEL CURSO -->
+        <EditText
+            android:id="@+id/etNombreCurso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre del Curso"
-            android:textColorHint="@color/grey"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
             android:textColor="@color/black"
-            android:inputType="textCapWords"
-            android:maxLines="1"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="12dp" />
 
-    <!-- Descripción del curso -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCursoDescripcion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tilCursoNombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCursoDescripcion"
+        <!-- DESCRIPCIÓN -->
+        <EditText
+            android:id="@+id/etDescripcionCurso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descripción del Curso"
-            android:textColorHint="@color/grey"
+            android:hint="Descripción"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:minLines="3"
+            android:gravity="top"
             android:textColor="@color/black"
-            android:inputType="textCapSentences"
-            android:maxLines="3"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="12dp" />
 
-    <!-- Profesor del curso -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCursoProfesor"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tilCursoDescripcion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCursoProfesor"
+        <!-- PROFESOR (SPINNER) -->
+        <Spinner
+            android:id="@+id/spinnerProfesor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Profesor del Curso"
-            android:textColorHint="@color/grey"
-            android:textColor="@color/black"
-            android:inputType="textPersonName"
-            android:maxLines="1"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/spinner_background"
+            android:minHeight="48dp"
+            android:padding="8dp" />
 
-    <!-- Horario del curso -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCursoHorario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tilCursoProfesor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCursoHorario"
+        <!-- SELECCIÓN DE DÍAS -->
+        <Button
+            android:id="@+id/btnSeleccionarDias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Horario del Curso"
-            android:inputType="none"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:focusable="false"
-            android:clickable="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:text="Seleccionar Días"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/skyblue"
+            android:layout_marginBottom="8dp" />
 
-    <!-- Botón para guardar el curso -->
-    <com.google.android.material.button.MaterialButton
+        <!-- TextView para mostrar los días seleccionados -->
+        <TextView
+            android:id="@+id/tvDiasSeleccionados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Días seleccionados: Ninguno"
+            android:textColor="@color/grey"
+            android:textStyle="italic"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Sección de días seleccionados con sus horarios -->
+        <LinearLayout
+            android:id="@+id/linearLayoutDiasHorarios"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="24dp">
+
+        <!-- Lunes -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunes"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioLunes"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinLunes" />
+
+        </LinearLayout>
+
+        <!-- Martes -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Martes"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioMartes"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinMartes" />
+
+        </LinearLayout>
+
+        <!-- Miércoles -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Miércoles"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioMiercoles"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinMiercoles" />
+
+        </LinearLayout>
+
+        <!-- Jueves -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jueves"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioJueves"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinJueves" />
+
+        </LinearLayout>
+
+        <!-- Viernes -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Viernes"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioViernes"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinViernes" />
+
+        </LinearLayout>
+
+        <!-- Sábado -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sábado"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioSabado"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinSabado" />
+
+        </LinearLayout>
+
+        <!-- Domingo -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domingo"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Inicio"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraInicioDomingo"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hora de Fin"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:focusable="false"
+                android:id="@+id/etHoraFinDomingo" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- BOTÓN DE GUARDAR -->
+    <Button
         android:id="@+id/btnGuardarCurso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Curso"
         android:textColor="@android:color/white"
-        android:layout_marginTop="32dp"
         android:backgroundTint="@color/blue"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tilCursoHorario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="24dp" />
+</LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

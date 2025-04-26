@@ -1,8 +1,10 @@
 package com.colegio.app.cursos
 
 data class Curso(
-    val nombre: String = "",
-    val descripcion: String = "",
-    val profesor: String = "",
-    val horario: String = ""
+    val id: String? = null,
+    val nombre: String? = null,
+    val descripcion: String? = null,
+    val profesorId: String? = null,
+    val profesorNombre: String? = null,
+    val horarios: Map<String, Horario>? = null
 )

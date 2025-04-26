@@ -8,29 +8,37 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.colegio.app.R
 
-class CursoAdapter(private val context: Context, private val listaCursos: List<Curso>) : BaseAdapter() {
+class CursoAdapter(private val context: Context, private val cursos: List<Curso>) : BaseAdapter() {
 
-    override fun getCount(): Int = listaCursos.size
+    override fun getCount(): Int = cursos.size
 
-    override fun getItem(position: Int): Any = listaCursos[position]
+    override fun getItem(position: Int): Any = cursos[position]
 
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val curso = getItem(position) as Curso
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rowView = inflater.inflate(R.layout.item_curso, parent, false)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_curso, parent, false)
 
-        val tvCursoNombre = rowView.findViewById<TextView>(R.id.tvCursoNombre)
-        val tvCursoDescripcion = rowView.findViewById<TextView>(R.id.tvCursoDescripcion)
-        val tvCursoProfesor = rowView.findViewById<TextView>(R.id.tvCursoProfesor)
-        val tvCursoHorario = rowView.findViewById<TextView>(R.id.tvCursoHorario)
+        val curso = cursos[position]
 
-        tvCursoNombre.text = curso.nombre
-        tvCursoDescripcion.text = curso.descripcion
-        tvCursoProfesor.text = curso.profesor
-        tvCursoHorario.text = curso.horario
+        val tvCursoNombre = view.findViewById<TextView>(R.id.tvCursoNombre)
+        val tvCursoDescripcion = view.findViewById<TextView>(R.id.tvCursoDescripcion)
+        val tvCursoProfesor = view.findViewById<TextView>(R.id.tvCursoProfesor)
+        val tvCursoHorario = view.findViewById<TextView>(R.id.tvCursoHorario)
 
-        return rowView
+        tvCursoNombre.text = curso.nombre ?: "Sin nombre"
+        tvCursoDescripcion.text = curso.descripcion ?: "Sin descripción"
+        tvCursoProfesor.text = curso.profesorNombre ?: "Sin profesor"
+
+        // Mostrar los días y horarios de forma bonita
+        val horariosTexto = StringBuilder()
+
+        curso.horarios?.forEach { (dia, horario) ->
+            horariosTexto.append("$dia: ${horario.horaInicio} - ${horario.horaFin}\n")
+        }
+
+        tvCursoHorario.text = if (horariosTexto.isNotEmpty()) horariosTexto.toString().trim() else "Sin horario"
+
+        return view
     }
 }

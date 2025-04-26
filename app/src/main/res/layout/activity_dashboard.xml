@@ -1,70 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".auth.DashboardActivity">
+    tools:context=".dashboard.DashboardActivity">
 
-  <!-- Barra superior con el nombre de la app -->
-  <TextView
-      android:id="@+id/tvWelcome"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="¡Bienvenido!"
-      android:textSize="24sp"
-      android:textColor="@color/black"
-      android:fontFamily="sans-serif-medium"
-      android:layout_marginTop="40dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:textAlignment="center"/>
+    <!-- Texto de bienvenida -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido!"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:textAlignment="center"/>
 
-  <!-- Correo del usuario -->
-  <TextView
-      android:id="@+id/tvUserEmail"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="user@example.com"
-      android:textSize="18sp"
-      android:textColor="@color/grey"
-      android:layout_marginTop="10dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-      android:textAlignment="center"/>
+    <!-- Lista de cursos -->
+    <ListView
+        android:id="@+id/lvCursos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:paddingTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnAgregarCurso"
+        android:layout_marginTop="20dp"/>
 
-  <!-- Imagen de usuario (Avatar) -->
-  <ImageView
-      android:id="@+id/ivUserAvatar"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
-      android:src="@drawable/ic_user_avatar"
-      android:layout_marginTop="20dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tvUserEmail"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="20dp"/>
+    <!-- Botón Agregar Curso -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAgregarCurso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Agregar Curso"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/blue"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/lvCursos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
-  <!-- Botón para cerrar sesión -->
-  <com.google.android.material.button.MaterialButton
-      android:id="@+id/btnLogout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Cerrar sesión"
-      android:textColor="@color/white"
-      app:backgroundTint="@color/blue"
-      app:cornerRadius="12dp"
-      android:layout_marginTop="30dp"
-      app:layout_constraintTop_toBottomOf="@id/ivUserAvatar"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Botón para cerrar sesión -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cerrar sesión"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/btnAgregarCurso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
