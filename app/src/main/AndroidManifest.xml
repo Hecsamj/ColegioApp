@@ -21,21 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ColegioApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".profesores.ProfesoresActivity"
+            android:exported="false" />
         <!-- Actividades del dashboard -->
         <activity
             android:name=".dashboard.DashboardActivity"
-            android:exported="false" />
-
-        <!-- Actividades del curso -->
+            android:exported="false" /> <!-- Actividades del curso -->
         <activity
             android:name=".cursos.AddCursoActivity"
             android:exported="true" />
         <activity
             android:name=".cursos.CursosActivity"
-            android:exported="false" />
-
-        <!-- Actividades de registro y login -->
+            android:exported="false" /> <!-- Actividades de registro y login -->
         <activity
             android:name=".auth.RegisterActivity"
             android:exported="true" />
@@ -44,10 +42,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

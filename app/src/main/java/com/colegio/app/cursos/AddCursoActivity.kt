@@ -6,6 +6,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.colegio.app.R
+import com.colegio.app.profesores.Profesor
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddCursoActivity : AppCompatActivity() {
@@ -22,6 +23,12 @@ class AddCursoActivity : AppCompatActivity() {
 
     private val listaHorarios = mutableMapOf<String, Horario>()
     private val diasMarcados = mutableSetOf<String>()
+
+    private val listaProfesores = mutableListOf<Profesor>()
+    private lateinit var adapterSpinner: ArrayAdapter<String>
+
+    private var profesorSeleccionadoId: String? = null
+    private var profesorSeleccionadoNombre: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +50,46 @@ class AddCursoActivity : AppCompatActivity() {
     }
 
     private fun setupSpinnerProfesor() {
-        val profesores = listOf("Seleccionar Profesor", "Juan Pérez", "Ana Gómez")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, profesores)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerProfesor.adapter = adapter
+        listaProfesores.clear()
+        val nombresProfesores = mutableListOf("Seleccionar Profesor")
+        adapterSpinner = ArrayAdapter(this, android.R.layout.simple_spinner_item, nombresProfesores)
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerProfesor.adapter = adapterSpinner
+
+        // Cargar profesores desde Firestore
+        db.collection("profesores")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val id = document.id
+                    val nombre = document.getString("nombre") ?: ""
+                    val profesor = Profesor(id, nombre)
+                    listaProfesores.add(profesor)
+                    nombresProfesores.add(nombre)
+                }
+                adapterSpinner.notifyDataSetChanged()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error al cargar profesores", Toast.LENGTH_SHORT).show()
+            }
+
+        spinnerProfesor.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View, position: Int, id: Long) {
+                if (position > 0) {
+                    val profesor = listaProfesores[position - 1]  // Restamos 1 porque el primer ítem es "Seleccionar Profesor"
+                    profesorSeleccionadoId = profesor.id
+                    profesorSeleccionadoNombre = profesor.nombre
+                } else {
+                    profesorSeleccionadoId = null
+                    profesorSeleccionadoNombre = null
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                profesorSeleccionadoId = null
+                profesorSeleccionadoNombre = null
+            }
+        })
     }
 
     private fun setupSeleccionDias() {
@@ -74,34 +117,29 @@ class AddCursoActivity : AppCompatActivity() {
     private fun mostrarDialogoHoras(dia: String) {
         if (diasMarcados.contains(dia)) return
 
-        // Crear el TimePickerDialog para la hora de inicio
         val timePickerInicio = TimePickerDialog(
             this,
             { _, hourOfDay, minute ->
                 val horaInicio = String.format("%02d:%02d", hourOfDay, minute)
 
-                // Crear el TimePickerDialog para la hora de fin
                 val timePickerFin = TimePickerDialog(
                     this,
                     { _, hourFin, minuteFin ->
                         val horaFin = String.format("%02d:%02d", hourFin, minuteFin)
 
-                        // Agregar el horario al mapa con la clave del día
                         listaHorarios[dia] = Horario(dia, horaInicio, horaFin)
                         diasMarcados.add(dia)
                         actualizarTextViewHorarios()
-
                     },
                     0, 0, true
                 )
-                timePickerFin.show()  // Mostrar el TimePicker de fin
+                timePickerFin.show()
 
             },
             0, 0, true
         )
-        timePickerInicio.show()  // Mostrar el TimePicker de inicio
+        timePickerInicio.show()
     }
-
 
     private fun eliminarDia(dia: String) {
         listaHorarios.remove(dia)
@@ -123,16 +161,8 @@ class AddCursoActivity : AppCompatActivity() {
     private fun guardarCurso() {
         val nombre = etNombreCurso.text.toString().trim()
         val descripcion = etDescripcionCurso.text.toString().trim()
-        val profesorNombre = spinnerProfesor.selectedItem.toString()
 
-        // Asignar un ID de profesor, en este caso asumimos que "Juan Pérez" tiene un ID de "1" y "Ana Gómez" "2"
-        val profesorId = when (profesorNombre) {
-            "Juan Pérez" -> "1"
-            "Ana Gómez" -> "2"
-            else -> null
-        }
-
-        if (nombre.isEmpty() || descripcion.isEmpty() || profesorNombre == "Seleccionar Profesor" || listaHorarios.isEmpty()) {
+        if (nombre.isEmpty() || descripcion.isEmpty() || profesorSeleccionadoId == null || listaHorarios.isEmpty()) {
             Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
             return
         }
@@ -140,8 +170,8 @@ class AddCursoActivity : AppCompatActivity() {
         val curso = Curso(
             nombre = nombre,
             descripcion = descripcion,
-            profesorId = profesorId,
-            profesorNombre = profesorNombre,
+            profesorId = profesorSeleccionadoId,
+            profesorNombre = profesorSeleccionadoNombre,
             horarios = listaHorarios
         )
 

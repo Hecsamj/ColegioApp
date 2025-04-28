@@ -12,6 +12,8 @@ import com.colegio.app.auth.LoginActivity
 import com.colegio.app.cursos.AddCursoActivity
 import com.colegio.app.cursos.Curso
 import com.colegio.app.cursos.CursoAdapter
+import com.colegio.app.profesores.ProfesoresActivity
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -66,6 +68,13 @@ class DashboardActivity : AppCompatActivity() {
         btnAgregarCurso.setOnClickListener {
             val intent = Intent(this, AddCursoActivity::class.java)
             startActivityForResult(intent, 1) // Usamos startActivityForResult para saber cuándo se agrega un curso
+        }
+
+        // Botón Profesores
+        val btnProfesores = findViewById<MaterialButton>(R.id.btnProfesores)
+        btnProfesores.setOnClickListener {
+            val intent = Intent(this, ProfesoresActivity::class.java)
+            startActivity(intent)
         }
 
         // Cerrar sesión
